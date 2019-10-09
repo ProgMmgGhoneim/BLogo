@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% block title%}
+  {{title}}
+{% endblock%}
+{% block content%}
+{% for x in query%}
+<div class="card text-center">
+        <div class="card-body">
+          <h1 class="card-title">{{x.title}}</h1>
+          <p class="card-text">{{x.content |linebreaks}}</p>
+          <small> {{x.timestap}}</small>
+          <p></p>
+          <p>{{x.published_data}}</p>
+          <p>{{x.updated_data}}</p>
+        </div>
+        {% if request.user.is_authenticated %}
+          {% if request.user.is_staff %}
+            <a href="{% url 'post_update' x.slug%}"> edit</a>
+            <a href="{% url 'post_delete' x.slug%}"> delete</a>
+          {% endif %}
+        {% endif %}
+  </div>
+  {%endfor%}
+{% endblock%}

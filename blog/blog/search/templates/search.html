@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if query %}
+  <h1>Searching for</h1>  {{query}}
+  {% if blog_list%}
+  {% for b in blog_list%}
+    <div class="card text-center">
+          <div class="card-body">
+            <h1 class="card-title">{{b.title}}</h1>
+            <p class="card-text">{{b.content |linebreaks}}</p>
+            <small> {{b.timestap}}</small>
+            <p></p>
+            <p>{{b.published_data}}</p>
+            <p>{{b.updated_data}}</p>
+          </div>
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
+              <a href="{% url 'post_update' b.slug%}"> edit</a>
+              <a href="{% url 'post_delete' b.slug%}"> delete</a>
+              {% endif %}
+           {% endif %}
+
+          {% endfor %}
+        </div>
+      {% else%}
+      <h5> not found</h5>
+    {% endif %}
+{% else %}
+  <h1> plese fill the search field</h1>
+{% endif %}
+{% endblock %}

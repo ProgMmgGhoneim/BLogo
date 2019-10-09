@@ -1,0 +1,36 @@
+<div>
+  <nav class="navbar navbar-default"  >
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'home'%}">
+          <img src="http://mmgkorea.com/kor/wp-content/uploads/2016/11/mmg-logo3.png" height="30" class="d-inline-block align-top"
+          alt="mdb logo">
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>  <a href="{% url 'home'%}" style="font-weight:bold" >home </a>
+          <li>  <a href="{% url 'post'%}" style="font-weight:bold" > blog </a></li>
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
+             <li><a href="{% url 'new_post'%}" style="font-weight:bold" > New </a></li>
+            {% endif %}
+          {% endif %}
+          <li><a href="{% url 'abouts'%}" style="font-weight:bold" > about </a></li>
+          <li><a href="{% url 'contact'%}" style="font-weight:bold" > contact </a></li>
+        </ul>
+        <div >
+          <form class="navbar-form navbar-right" action="/search/">
+            <div class="form-group" style="display:inline;">
+              <input type="text" class="form-control  " name='query' placeholder="Search" ">
+            </div>
+            <button type="submit" class="btn btn-info" style="width:7rem">Submit</button>
+          </form>
+        </div>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+</div>

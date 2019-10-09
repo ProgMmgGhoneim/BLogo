@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% block title%}
+  {{posts_details.title}}
+{% endblock %}
+{% block content %}
+  <div class="card text-center">
+          <div class="card-body">
+            <h1 class="card-title">{{posts_details.title}}</h1>
+            <p class="card-text">{{posts_details.content |linebreaks}}</p>
+            <small> {{p.timestap}}</small>
+            <p></p>
+            <p>{{posts_details.published_data}}</p>
+            <p>{{posts_details.updated_data}}</p>
+          </div>
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
+              <a href="{% url 'post_update' posts_details.slug%}"> edit</a>
+              <a href="{% url 'post_delete' posts_details.slug%}"> delete</a>
+            {% endif %}
+          {% endif %}
+    </div>
+
+
+{% endblock %}
